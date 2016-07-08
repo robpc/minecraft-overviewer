@@ -8,6 +8,8 @@ def playerIcons(poi):
 worlds['minecraft'] = os.getenv('MINECRAFT_WORLD_DIR',"/home/minecraft/server/world")
 outputdir = os.getenv('MINECRAFT_MAP_RENDER_DIR',"/home/minecraft/render/")
 
+customwebassets = "/home/minecraft/custom-web"
+
 renders["day"] = {
     'world': 'minecraft',
     'title': 'Day',

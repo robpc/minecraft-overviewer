@@ -1,0 +1,4 @@
+run:
+    build: .
+    environment:
+        GOOGLE_API_KEY: key

@@ -5,6 +5,8 @@ run() {
   overviewer.py --config /home/minecraft/config.py --genpoi
 }
 
+envsubst < /home/minecraft/custom-template/index.template > /home/minecraft/custom-web/index.html
+
 if [ ! -z "${INTERVAL}" ]; then
   sleep 60
   while true 

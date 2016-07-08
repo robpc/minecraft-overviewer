@@ -15,7 +15,7 @@ RUN echo "deb http://overviewer.org/debian ./" >> /etc/apt/sources.list && \
     apt-get install -y wget && \
     wget -O - http://overviewer.org/debian/overviewer.gpg.asc | apt-key add - && \
     apt-get update && \
-    apt-get install -y minecraft-overviewer && \
+    apt-get install -y minecraft-overviewer gettext && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     useradd -m minecraft && \
@@ -23,6 +23,11 @@ RUN echo "deb http://overviewer.org/debian ./" >> /etc/apt/sources.list && \
 
 COPY config/config.py /home/minecraft/config.py
 COPY entrypoint.sh /home/minecraft/entrypoint.sh
+
+RUN mkdir -p /home/minecraft/custom-template
+RUN mkdir -p /home/minecraft/custom-web
+
+COPY html/index.template /home/minecraft/custom-template
 
 RUN chown minecraft:minecraft -R /home/minecraft/
 
