@@ -1,4 +1,5 @@
-run:
+test:
     build: .
     environment:
+        MAPGEN_INTERVAL: 120
         GOOGLE_API_KEY: key

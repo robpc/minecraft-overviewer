@@ -7,12 +7,12 @@ run() {
 
 envsubst < /home/minecraft/custom-template/index.template > /home/minecraft/custom-web/index.html
 
-if [ ! -z "${INTERVAL}" ]; then
+if [ ! -z "${MAPGEN_INTERVAL}" ]; then
   sleep 60
   while true 
   do
     run
-    sleep ${INTERVAL}
+    sleep ${MAPGEN_INTERVAL}
   done
 else
   run
