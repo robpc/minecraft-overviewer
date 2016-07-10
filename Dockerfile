@@ -35,4 +35,6 @@ WORKDIR /home/minecraft/
 
 USER minecraft
 
+VOLUME "/home/minecraft/render/"
+
 CMD ["bash", "/home/minecraft/entrypoint.sh"]
