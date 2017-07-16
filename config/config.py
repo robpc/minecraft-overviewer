@@ -13,9 +13,9 @@ def signFilter(poi):
             return "\n".join([poi['Text1'], poi['Text2'], poi['Text3'], poi['Text4']])
 
 worlds['minecraft'] = os.getenv('MINECRAFT_WORLD_DIR',"/home/minecraft/server/world")
-outputdir = "/home/minecraft/render/"
+outputdir = "/home/minecraft-overviewer/render/"
 
-customwebassets = "/home/minecraft/custom-web"
+customwebassets = "/home/minecraft-overviewer/custom-web"
 
 markers = [
     dict(name="Players", filterFunction=playerIcons),

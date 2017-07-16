@@ -3,22 +3,21 @@ set -o errexit
 
 # Require MINECRAFT_VERSION environment variable to be set (no default assumed)
 if [ -z "$MINECRAFT_VERSION" ]; then
-  echo "Expecting environment variable MINECRAFT_VERSION to be set to non-empty string. Exiting."
+  echo "Expecting environment variable MINECRAFT_VERSION to be set if no versions available at /home/minecraft/.minecraft/versions/. Exiting."
   exit 1
 fi
 
-# Download Minecraft client .jar (Contains textures used by Minecraft Overviewer)
 wget https://s3.amazonaws.com/Minecraft.Download/versions/${MINECRAFT_VERSION}/${MINECRAFT_VERSION}.jar -P /home/minecraft/.minecraft/versions/${MINECRAFT_VERSION}/
 
 run() {
-  overviewer.py --config /home/minecraft/config.py
-  overviewer.py --config /home/minecraft/config.py --genpoi
+  overviewer.py --config /home/minecraft-overviewer/config.py
+  overviewer.py --config /home/minecraft-overviewer/config.py --genpoi
 }
 
-envsubst < /home/minecraft/custom-template/index.template > /home/minecraft/custom-web/index.html
+envsubst < /home/minecraft-overviewer/custom-template/index.template > /home/minecraft-overviewer/custom-web/index.html
 
 if [ ! -z "${MAPGEN_INTERVAL}" ]; then
-  sleep 60
+  sleep 120
   while true 
   do
     run

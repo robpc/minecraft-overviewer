@@ -12,29 +12,30 @@ MAINTAINER Mark Ide Jr (https://www.mide.io)
 
 RUN echo "deb http://overviewer.org/debian ./" >> /etc/apt/sources.list && \
     apt-get update && \
-    apt-get install -y wget && \
+    apt-get install -y wget gnupg2 && \
     wget -O - https://overviewer.org/debian/overviewer.gpg.asc | apt-key add - && \
     apt-get update && \
     apt-get install -y minecraft-overviewer gettext && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-    useradd -m minecraft && \
-    mkdir -p /home/minecraft/render /home/minecraft/server
+    useradd -m minecraft 
 
-COPY config/config.py /home/minecraft/config.py
-COPY entrypoint.sh /home/minecraft/entrypoint.sh
+RUN mkdir -p /home/minecraft-overviewer/render
 
-RUN mkdir -p /home/minecraft/custom-template
-RUN mkdir -p /home/minecraft/custom-web
+COPY config/config.py /home/minecraft-overviewer/config.py
+COPY entrypoint.sh /home/minecraft-overviewer/entrypoint.sh
 
-COPY html/index.template /home/minecraft/custom-template
+RUN mkdir -p /home/minecraft-overviewer/custom-template
+RUN mkdir -p /home/minecraft-overviewer/custom-web
 
-RUN chown minecraft:minecraft -R /home/minecraft/
+COPY html/index.template /home/minecraft-overviewer/custom-template
 
-WORKDIR /home/minecraft/
+RUN chown minecraft:minecraft -R /home/minecraft-overviewer/
+
+WORKDIR /home/minecraft-overviewer/
 
 USER minecraft
 
-VOLUME "/home/minecraft/render/"
+VOLUME "/home/minecraft-overviewer/render/"
 
-CMD ["bash", "/home/minecraft/entrypoint.sh"]
+CMD ["bash", "/home/minecraft-overviewer/entrypoint.sh"]
