@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # To use this Docker container, make sure you set up the mounts properly.
+=======
+# To use this Docker image, make sure you set up the mounts properly.
+>>>>>>> upstream/master
 #
 # The Minecraft server files are expected at
 #     /home/minecraft/server
@@ -6,16 +10,16 @@
 # The Minecraft-Overviewer render will be output at
 #     /home/minecraft/render
 
-FROM debian:jessie
+FROM debian:latest
 
-ENV MINECRAFT_VERSION 1.10.2
+MAINTAINER Mark Ide Jr (https://www.mide.io)
 
 RUN echo "deb http://overviewer.org/debian ./" >> /etc/apt/sources.list && \
     apt-get update && \
     apt-get install -y wget && \
-    wget -O - http://overviewer.org/debian/overviewer.gpg.asc | apt-key add - && \
+    wget -O - https://overviewer.org/debian/overviewer.gpg.asc | apt-key add - && \
     apt-get update && \
-    apt-get install -y minecraft-overviewer gettext && \
+    apt-get install -y minecraft-overviewer && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     useradd -m minecraft && \
